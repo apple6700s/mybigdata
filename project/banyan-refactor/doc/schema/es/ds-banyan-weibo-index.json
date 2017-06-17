@@ -1,0 +1,319 @@
+curl -XPUT http://todi1:9200/ds-banyan-weibo-index-v1 -d '
+{
+  "settings": {
+    "index.number_of_shards": 48,
+    //    "index.number_of_shards": 2,
+    "index.number_of_replicas": 0,
+    "analysis": {
+      "analyzer": {
+        "ds_analyzer": {
+          "type": "custom",
+          "tokenizer": "standard",
+          "filter": [
+            "standard",
+            "lowercase",
+            "stop",
+            "ds_word_delimiter"
+          ]
+        }
+      },
+      "filter": {
+        "ds_word_delimiter": {
+          "type": "word_delimiter",
+          "preserve_original": false,
+          "split_on_numerics": true
+        }
+      }
+    }
+  },
+  "aliases": {
+    "ds-banyan-weibo-index": {}
+  },
+  "mappings": {
+    "weibo": {
+      "_all": {
+        "enabled": false
+      },
+      "_parent": {
+        "type": "user",
+        "fielddata": {
+          "loading": "eager_global_ordinals"
+        }
+      },
+      "dynamic_templates": [
+        {
+          "template_1": {
+            "match": "*",
+            "match_mapping_type": "string",
+            "mapping": {
+              "index": "not_analyzed",
+              "type": "string"
+            }
+          }
+        }
+      ],
+      "properties": {
+        // 用mid来做id
+        "id": {
+          "type": "string",
+          "index": "not_analyzed"
+        },
+        "uid": {
+          "type": "string",
+          "index": "not_analyzed"
+        },
+        // rt_mid ，即 pid
+        "rt_mid": {
+          "type": "string",
+          "index": "not_analyzed"
+        },
+        // 微博内容
+        "content": {
+          "type": "string",
+          "analyzer": "ds_analyzer",
+          "search_analyzer": "ds_analyzer"
+        },
+        "content_len": {
+          "type": "long"
+        },
+        // 转发微博中自己添加的部分
+        "self_content": {
+          "type": "string",
+          "analyzer": "ds_analyzer",
+          "search_analyzer": "ds_analyzer"
+        },
+        "self_content_len": {
+          "type": "long"
+        },
+        // 发布终端
+        "source": {
+          "type": "string",
+          "index": "not_analyzed"
+        },
+        // 话题 list
+        "topics": {
+          "type": "string",
+          "index": "not_analyzed"
+        },
+        // 表情
+        "emoji": {
+          // list [开心] [难过]
+          "type": "string",
+          "index": "not_analyzed"
+        },
+        // 微博类型: －1:其他 0:原帖 1:第一层转发不带文字 2:第一层转发带文字 3:多层转发
+        "msg_type": {
+          "type": "short"
+        },
+        // 转发的原微博id
+        "src_mid": {
+          "type": "string",
+          "index": "not_analyzed"
+        },
+        // 转发的原微博内容
+        "src_content": {
+          "type": "string",
+          "analyzer": "ds_analyzer",
+          "search_analyzer": "ds_analyzer"
+        },
+        "src_content_len": {
+          "type": "long"
+        },
+        // 图片字段
+        "pic_urls": {
+          "type": "string",
+          "index": "not_analyzed"
+        },
+        "publish_time": {
+          "type": "date"
+        },
+        "publish_date": {
+          "type": "string",
+          "index": "not_analyzed"
+        },
+        "update_date": {
+          "type": "string",
+          "index": "not_analyzed"
+        },
+        // 冗余存储,方便做agg
+        "publish_date_hour": {
+          "type": "string",
+          "index": "not_analyzed"
+        },
+        "publish_date_date": {
+          "type": "string",
+          "index": "not_analyzed"
+        },
+        // 转发
+        "reposts_cnt": {
+          "type": "long"
+        },
+        // 评论数
+        "comments_cnt": {
+          "type": "long"
+        },
+        // 点赞数
+        "attitudes_cnt": {
+          "type": "long"
+        },
+        // 互动量 以上三者相加
+        "interactions_cnt": {
+          "type": "long"
+        },
+        "sentiment": {
+          // -1 0 1
+          "type": "short"
+        },
+        "keywords": {
+          "type": "string",
+          "index": "not_analyzed"
+        }
+      }
+    },
+    "user": {
+      "_all": {
+        "enabled": false
+      },
+      "dynamic_templates": [
+        {
+          "template_1": {
+            "match": "*",
+            "match_mapping_type": "string",
+            "mapping": {
+              "index": "not_analyzed",
+              "type": "string"
+            }
+          }
+        }
+      ],
+      "properties": {
+        // 微博用户id作为doc id
+        "id": {
+          "type": "string",
+          "index": "not_analyzed"
+        },
+        // 用户昵称
+        "name": {
+          "type": "string",
+          "index": "not_analyzed"
+        },
+        // 出生年份, 用于计算年龄
+        "birthyear": {
+          "type": "short"
+        },
+        // 生日
+        "birthdate": {
+          "type": "string",
+          "index": "not_analyzed"
+        },
+        // 星座
+        "constellation": {
+          "type": "string",
+          "index": "not_analyzed"
+        },
+        "update_date": {
+          "type": "string",
+          "index": "not_analyzed"
+        },
+        "desc": {
+          "type": "string",
+          "index": "no"
+        },
+        // 用户类型
+        "user_type": {
+          "type": "short"
+        },
+        // 认证类型，微博原始的认证类型: -1普通用户, 0名人, 1政府, 2企业, 3媒体, 4校园, 5网站, 6应用, 7团体（机构）, 8待审企业, 200初级达人, 220中高级达人, 400已故V用户
+        "verified_type": {
+          "type": "short"
+        },
+        // 业务使用的认证类型，4类
+        "vtype": {
+          "type": "short"
+        },
+        // 性别（1男 2女）
+        "gender": {
+          "type": "short"
+        },
+        // 粉丝数
+        "fans_cnt": {
+          "type": "long"
+        },
+        // 关注数
+        "follow_cnt": {
+          "type": "long"
+        },
+        // 微博数
+        "wb_cnt": {
+          "type": "long"
+        },
+        // 点赞数
+        "fav_cnt": {
+          "type": "long"
+        },
+        // 省份
+        "province": {
+          "type": "short"
+        },
+        // 城市
+        "city": {
+          "type": "short"
+        },
+        // 城市级别
+        "city_level": {
+          "type": "short"
+        },
+        // 人群
+        "group": {
+          "type": "string",
+          "index": "not_analyzed"
+        },
+        // 爱好 list 只存tag
+        "meta_group": {
+          "type": "string",
+          "index": "not_analyzed"
+        },
+        // 公司 list 只存name
+        "company": {
+          "type": "string",
+          "index": "not_analyzed"
+        },
+        // 学校 list 只存name
+        "school": {
+          "type": "string",
+          "index": "not_analyzed"
+        },
+        // 活跃度
+        "activeness": {
+          "type": "short"
+        },
+        // 粉丝级别
+        "fans_level": {
+          "type": "short"
+        },
+        // 用户关注的人列表
+        "follow_list": {
+          "type": "string",
+          "index": "not_analyzed"
+        },
+        "sources": {
+          "type": "string",
+          "index": "not_analyzed"
+        },
+        "topics": {
+          "type": "string",
+          "index": "not_analyzed"
+        },
+        "footprints": {
+          "type": "string",
+          "index": "not_analyzed"
+        },
+        "keywords": {
+          "type": "string",
+          "index": "not_analyzed"
+        }
+      }
+    }
+  }
+}
+'

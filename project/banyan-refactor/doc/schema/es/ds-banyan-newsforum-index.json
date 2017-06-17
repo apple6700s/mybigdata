@@ -1,0 +1,258 @@
+curl -XPUT http://172.18.5.142:9200/ds-banyan-newsforum-index-v1 -d '
+{
+  "settings": {
+//        "index.number_of_shards": 2,
+        "index.number_of_shards": 48,
+        "index.number_of_replicas": 1
+  },
+  "aliases": {
+    "ds-banyan-newsforum-index": {}
+  },
+  "mappings": {
+    "post": {
+      "_all": {
+        "enabled": false
+      },
+      "_source": {
+        "excludes": [
+          "content",
+          "all_content"
+        ]
+      },
+      "dynamic_templates": [
+        {
+          "template_1": {
+            "match": "*",
+            "match_mapping_type": "string",
+            "mapping": {
+              "type": "string",
+              "index": "not_analyzed"
+            }
+          }
+        }
+      ],
+      "properties": {
+        // 用item_id
+        "id": {
+          "type": "string",
+          "index": "not_analyzed"
+        },
+        // 论坛为主贴＋第一页回帖内容， 新闻为正文
+        "all_content": {
+          "analyzer": "standard",
+          "type": "string"
+        },
+        "all_content_len": {
+          "type": "long"
+        },
+        // 论坛主贴，新闻正文
+        "content": {
+          "analyzer": "standard",
+          "type": "string"
+        },
+        "content_len": {
+          "type": "long"
+        },
+        "title": {
+          "analyzer": "standard",
+          "type": "string"
+        },
+        "author": {
+          "index": "not_analyzed",
+          "type": "string"
+        },
+        "source" :{
+          "index": "not_analyzed",
+          "type": "string"
+        },
+        "view_cnt": {
+          "type": "long"
+        },
+        "review_cnt": {
+          "type": "long"
+        },
+        "url": {
+          "index": "not_analyzed",
+          "type": "string"
+        },
+        "domain": {
+          "index": "not_analyzed",
+          "type": "string"
+        },
+        "site_id": {
+          "index": "not_analyzed",
+          "type": "string"
+        },
+        "site_name":{
+          "index": "not_analyzed",
+          "type": "string"
+        },
+        //  1-电商 ,2-论坛,3-新闻,4-视频,5-渠道,6-博客,7-问答,8-其他
+        "cat_id": {
+          "type": "short"
+        },
+        "publish_time": {
+          "type": "date"
+        },
+        // 发布时间
+        "publish_date": {
+          "type": "string",
+          "index": "not_analyzed"
+        },
+        // 冗余存储，方便agg
+        "publish_date_hour": {
+          "type": "string",
+          "index": "not_analyzed"
+        },
+        "publish_date_date": {
+          "type": "string",
+          "index": "not_analyzed"
+        },
+        // 入库时间
+        "update_date": {
+          "type": "string",
+          "index": "not_analyzed"
+        },
+        "sentiment": {
+          "type": "short"
+        },
+        "keywords": {
+          "type": "string",
+          "index": "not_analyzed"
+        },
+        // md5(keywords)
+        "fingerprint": {
+          "type": "string",
+          "index": "not_analyzed"
+        },
+        // 广告
+        "is_ad": {
+          "type": "short"
+        },
+        "taskId": {
+          "index": "not_analyzed",
+          "type": "string"
+        },
+        "is_digest": {
+          "type": "short"
+        },
+        "is_hot": {
+          "type": "short"
+        },
+        "is_top": {
+          "type": "short"
+        },
+        "is_recom": {
+          "type": "short"
+        },
+        "is_robot": {
+          "type": "short"
+        }
+      }
+    },
+    "comment": {
+      "_all": {
+        "enabled": false
+      },
+      "_parent": {
+        "fielddata": {
+          "loading": "eager_global_ordinals"
+        },
+        "type": "post"
+      },
+      "_source": {
+        "excludes": [
+          "content"
+        ]
+      },
+      "dynamic_templates": [
+        {
+          "template_1": {
+            "match": "*",
+            "match_mapping_type": "string",
+            "mapping": {
+              "index": "not_analyzed",
+              "type": "string"
+            }
+          }
+        }
+      ],
+      "properties": {
+        // pk, item_id
+        "id": {
+          "type": "string",
+          "index": "not_analyzed"
+        },
+        //  1-电商 ,2-论坛,3-新闻,4-视频,5-渠道,6-博客,7-问答,8-其他
+        "cat_id": {
+          "type": "short"
+        },
+        // 回帖或评论内容
+        "content": {
+          "type": "string",
+          "analyzer": "standard"
+        },
+        "content_len": {
+          "type": "long"
+        },
+        "author": {
+          "type": "string",
+          "index": "not_analyzed"
+        },
+        "publish_time": {
+          "type": "date"
+        },
+        "url": {
+          "index": "not_analyzed",
+          "type": "string"
+        },
+        "domain": {
+          "index": "not_analyzed",
+          "type": "string"
+        },
+        // 发布时间
+        "publish_date": {
+          "type": "string",
+          "index": "not_analyzed"
+        },
+        // 冗余存储，方便agg
+        "publish_date_hour": {
+          "type": "string",
+          "index": "not_analyzed"
+        },
+        "publish_date_date": {
+          "type": "string",
+          "index": "not_analyzed"
+        },
+        // 抓取时间
+        "update_date": {
+          "type": "string",
+          "index": "not_analyzed"
+        },
+        "sentiment": {
+          "type": "short"
+        },
+        "parent_post_id": {
+          "type": "string",
+          "index": "not_analyzed"
+        },
+        // 广告
+        "is_ad": {
+          "type": "short"
+        },
+        "is_robot": {
+          "type": "short"
+        },
+        "keywords": {
+          "type": "string",
+          "index": "not_analyzed"
+        },
+        // md5(keywords)
+        "fingerprint": {
+          "type": "string",
+          "index": "not_analyzed"
+        }
+      }
+    }
+  }
+}'

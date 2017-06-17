@@ -1,0 +1,92 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+
+<configuration>
+
+  <property>
+    <name>kafka.broker.list</name>
+    <!--<value>dev3:6667</value>-->
+    <!--<value>devrhino1:6667,devrhino2:6667,devrhino3:6667</value>-->
+    <value>alps18:6667,alps3:6667,alps35:6667,alps51:6667,alps8:6667</value>
+  </property>
+
+  <!--spark conf-->
+  <property>
+    <name>spark.master.url</name>
+    <!--<value>spark://d1:7077</value>-->
+    <value>spark://alps61:7077,alps62:7077</value>
+    <description></description>
+  </property>
+
+  <!--<property>-->
+  <!--<name>spark.cores.max</name>-->
+  <!--<value>40</value>-->
+  <!--</property>-->
+
+  <!--<property>-->
+  <!--<name>spark.default.parallelism</name>-->
+  <!--<value>40</value>-->
+  <!--<description></description>-->
+  <!--</property>-->
+
+  <!--<property>-->
+  <!--<name>spark.executor.memory</name>-->
+  <!--<value>8g</value>-->
+  <!--<description></description>-->
+  <!--</property>-->
+
+  <!-- kafka zk config -->
+  <property>
+    <name>kafka.hbase.zookeeper.property.clientPort</name>
+    <value>2181</value>
+  </property>
+
+  <property>
+    <name>kafka.hbase.zookeeper.quorum</name>
+    <value>alps17,alps2,alps34,alps50,alps59</value>
+    <!--<value>devrhino1,devrhino2,devrhino3</value>-->
+  </property>
+
+  <!-- es config -->
+  <property>
+    <name>es.hosts</name>
+    <!--<value>172.18.5.142:9300,172.18.5.141:9300</value>-->
+    <value>alps61:9300,alps62:9300,alps63:9300,todi1:9300,todi2:9300,todi3:9300,todi4:9300,todi5:9300,todi6:9300,todi7:9300,todi8:9300,todi9:9300,todi10:9300,todi11:9300,todi12:9300,todi13:9300,todi14:9300,todi16:9300,todi17:9300,todi18:9300,todi19:9300,todi20:9300,todi21:9300,todi22:9300,todi23:9300,todi24:9300,todi25:9300,todi26:9300,todi27:9300,todi28:9300,todi29:9300,todi30:9300,todi31:9300,todi32:9300,todi33:9300,todi34:9300,todi35:9300,todi36:9300,todi37:9300,todi38:9300,todi39:9300,todi40:9300,todi41:9300,todi42:9300,todi43:9300,todi44:9300,todi45:9300,todi46:9300,todi47:9300,todi48:9300</value>
+    <!--<value>172.18.5.142:9300,172.18.5.141:9300</value>-->
+    <description></description>
+  </property>
+
+  <property>
+    <name>es.url</name>
+    <value>http://es-rhino.datatub.com</value>
+  </property>
+
+  <!--Rhino*Writer写入的cluster-->
+  <property>
+    <name>es.cluster.name</name>
+    <!--<value>devrhino_es_cluster</value>-->
+    <value>rhino_es_cluster</value>
+    <description></description>
+  </property>
+
+  <property>
+    <name>redis.server</name>
+    <value>banyan1:etl:$alps36:6379:0</value>
+  </property>
+
+  <!-- retry log -->
+  <property>
+    <name>retry.log.path</name>
+    <value>/tmp/banyan/retry</value>
+  </property>
+
+  <property>
+    <name>retry.log.enable</name>
+    <value>true</value>
+  </property>
+
+  <property>
+    <name>default.suicide.time</name>
+    <value>150000</value>  <!-- 15:00:00 -->
+  </property>
+</configuration>

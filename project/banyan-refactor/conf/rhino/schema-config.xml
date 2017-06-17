@@ -1,0 +1,194 @@
+<configuration>
+  <!-- kafka -->
+  <!--kafka weibo all-->
+  <property>
+    <name>consumer.group.weibo.all</name>
+    <value>consumer.group.weibo.all.refactor.v1.debug</value>
+  </property>
+
+  <property>
+    <name>topic.rhino.weibo.all</name>
+    <value>topic_rhino_weibo_all</value>
+  </property>
+
+  <!--kafka weibo update-->
+  <property>
+    <name>consumer.group.weibo.update</name>
+    <value>consumer.group.weibo.update.refactor.v1.debug</value>
+  </property>
+
+  <property>
+    <name>topic.rhino.weibo.update</name>
+    <value>topic_rhino_weibo_count</value>
+  </property>
+
+  <!--kafka weibo comment-->
+  <property>
+    <name>topic.rhino.weibo.comment</name>
+    <value>topic_rhino_weibo_comment</value>
+  </property>
+
+  <property>
+    <name>consumer.group.weibo.comment</name>
+    <!--<value>consumer.group.weibo.comment.refactor.v1</value>-->
+    <value>consumer.group.weibo.comment.refactor.v2</value>
+  </property>
+
+  <!--kafka new&bbs all-->
+  <property>
+    <name>consumer.group.news.all</name>
+    <value>consumer.group.news.all.refactor.v1</value>
+  </property>
+
+  <property>
+    <name>topic.rhino.news_bbs.all</name>
+    <value>topic_rhino_news_bbs_all_v3</value>
+  </property>
+
+  <!-- kafka wechat -->
+  <property>
+    <name>consumer.group.wx.cnt</name>
+    <value>consumer_group_wx_cnt</value>
+  </property>
+
+  <property>
+    <name>topic.rhino.wx.cnt</name>
+    <value>topic_rhino_wx_cnt</value>
+  </property>
+
+  <!-- kafka video -->
+  <property>
+    <name>consumer.group.vd.all</name>
+    <value>consumer_group_vd_all</value>
+  </property>
+
+  <property>
+    <name>topic.rhino.vd.all</name>
+    <value>topic_rhino_vd_all</value>
+  </property>
+
+  <!-- kafka ecom -->
+  <property>
+    <name>consumer.group.ecom.all</name>
+    <value>consumer_group_ecom_all</value>
+  </property>
+
+  <property>
+    <name>topic.rhino.ecom.all</name>
+    <value>topic_rhino_ecom_all</value>
+  </property>
+
+  <!-- asyncdata -->
+  <property>
+    <name>consumer.rhino.asyncdata.all</name>
+    <value>consumer_rhino_asyncdata_all</value>
+  </property>
+
+  <property>
+    <name>topic.rhino.asyncdata.all</name>
+    <value>topic_rhino_asyncdata_all</value>
+  </property>
+
+  <property>
+    <name>consumer.rhino.asyncdata.rt</name>
+    <value>consumer_rhino_asyncdata_rt</value>
+  </property>
+
+  <property>
+    <name>topic.rhino.asyncdata.rt</name>
+    <value>topic_rhino_asyncdata_rt</value>
+  </property>
+
+
+  <!-- kafka topic hbase to es -->
+  <property>
+    <name>kafka.pk.spout.enable</name>
+    <value>false</value>
+  </property>
+
+  <!--<property>-->
+  <!--<name>topic.banyan.pk.weibo</name>-->
+  <!--<value>topic_banyan_pk_weibo</value>-->
+  <!--</property>-->
+
+  <!--<property>-->
+  <!--<name>consumer.banyan.pk.weibo</name>-->
+  <!--<value>consumer_banyan_pk_weibo</value>-->
+  <!--</property>-->
+
+  <!--<property>-->
+  <!--<name>topic.banyan.pk.wechat</name>-->
+  <!--<value>topic_banyan_pk_wechat_v1</value>-->
+  <!--</property>-->
+
+  <!--<property>-->
+  <!--<name>consumer.banyan.pk.wechat</name>-->
+  <!--<value>consumer_banyan_pk_wechat</value>-->
+  <!--</property>-->
+
+  <!--<property>-->
+  <!--<name>topic.banyan.pk.newsforum</name>-->
+  <!--<value>topic_banyan_pk_newsforum_v0</value>-->
+  <!--</property>-->
+
+  <!--<property>-->
+  <!--<name>consumer.banyan.pk.newsforum</name>-->
+  <!--<value>consumer_banyan_pk_newsforum_v0</value>-->
+  <!--</property>-->
+
+  <!-- Hbase config -->
+
+
+
+  <property>
+    <name>DS_BANYAN_VIDEO_POST</name>
+    <value>DS_BANYAN_VIDEO_POST</value>
+  </property>
+
+  <property>
+    <name>DS_BANYAN_VIDEO_COMMENT</name>
+    <value>DS_BANYAN_VIDEO_COMMENT</value>
+  </property>
+
+  <property>
+    <name>DS_BANYAN_ECOM_ITEM</name>
+    <value>DS_BANYAN_ECOM_ITEM</value>
+  </property>
+
+  <property>
+    <name>DS_BANYAN_ECOM_COMMENT</name>
+    <value>DS_BANYAN_ECOM_COMMENT</value>
+  </property>
+
+  <property>
+    <name>DS_BANYAN_COMMON_TREND</name>
+    <value>DS_BANYAN_COMMON_TREND</value>
+  </property>
+
+  <!-- ES -->
+  <property>
+    <name>ds-banyan-wechat-index</name>
+    <value>ds-banyan-wechat-index</value>
+  </property>
+  <property>
+    <name>ds-banyan-weibo-index</name>
+    <!--<value>ds-banyan-weibo-index</value>-->
+    <value>dt-rhino-weibo-index</value>
+  </property>
+  <property>
+    <name>ds-banyan-newsforum-index</name>
+    <value>ds-banyan-newsforum-index</value>
+  </property>
+  <property>
+    <name>ds-banyan-video-index</name>
+    <value>ds-banyan-video-index</value>
+  </property>
+  <property>
+    <name>ds-banyan-ecom-index</name>
+    <value>ds-banyan-ecom-index</value>
+  </property>
+  <property>
+    <name>ds-banyan-weibo-comment-index</name>
+    <value>dt-rhino-weibo-comment-index</value>
+  </property>
+</configuration>
