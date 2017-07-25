@@ -1,0 +1,58 @@
+  <configuration>
+
+    <property>
+      <name>hbase.client.keyvalue.maxsize</name>
+      <value>52428800</value>
+    </property>
+    
+    <property>
+      <name>hbase.client.retries.number</name>
+      <value>35</value>
+    </property>
+    
+    <property>
+      <name>hbase.client.scanner.caching</name>
+      <value>100</value>
+    </property>
+    
+    <property>
+      <name>hbase.local.dir</name>
+      <value>${hbase.tmp.dir}/local</value>
+    </property>
+    
+    <property>
+      <name>hbase.rpc.timeout</name>
+      <value>3000000</value>
+    </property>
+    
+    <property>
+      <name>hbase.zookeeper.property.clientPort</name>
+      <value>2181</value>
+    </property>
+    
+    <property>
+      <name>hbase.zookeeper.quorum</name>
+      <value>todi1,todi10,todi11,alps61,alps62</value>
+    </property>
+    
+    <property>
+      <name>hbase.zookeeper.useMulti</name>
+      <value>true</value>
+    </property>
+    
+    <property>
+      <name>phoenix.query.timeoutMs</name>
+      <value>120000</value>
+    </property>
+    
+    <property>
+      <name>zookeeper.session.timeout</name>
+      <value>3000000</value>
+    </property>
+    
+    <property>
+      <name>zookeeper.znode.parent</name>
+      <value>/hbase-unsecure</value>
+    </property>
+    
+  </configuration>

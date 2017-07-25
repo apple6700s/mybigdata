@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+  <!--规则名称，用于xml加载-->
+  <ruleset name="post">
+
+    <rule errorlevel="ERROR_DELETE" iscannull="false">
+      <field>pk</field>
+      <description>规则用于检查field是否为空，若空，则记录且删除。</description>
+    </rule>
+
+    <rule errorlevel="ERROR_IGNORE_NULL" iscannull="false">
+      <field>cat_id,title,content,all_content,author,url,site_id,site_name,source,taskId,sentiment,keywords,fingerprint</field>
+      <description>该规则用于检查field是否为空，若空，则记录。</description>
+    </rule>
+
+    <rule errorlevel="ERROR_IGNORE_NULL" iscannull="false" type="Int">
+      <field>is_digest,is_hot,is_top,is_recom,is_ad,is_robot</field>
+      <description>该规则用于记录原值字段是否为shifou</description>
+    </rule>
+
+    <rule errorlevel="ERROR_IGNORE_NULL" iscannull="true" isrecordzero="true" type="Int">
+      <field>view_cnt,review_cnt</field>
+      <description>该规则用于记录原值字段是否为零值</description>
+    </rule>
+
+    <rule errorlevel="ERROR_IGNORE_NULL" iscannull="false">
+      <field>publish_date,update_date</field>
+      <valids>
+        <valid>
+          <execute>date</execute>
+          <!--action和type联合使用，比如type等于regex时，用户还需填写表达式-->
+          <action>yyyyMMddHHmmss</action>
+        </valid>
+      </valids>
+      <description>规则检查field是否为空，且是否是满足格式的日期时间</description>
+    </rule>
+
+  </ruleset>
+
+  <ruleset name="comment">
+
+    <rule errorlevel="ERROR_DELETE" iscannull="false">
+      <field>pk</field>
+      <description>规则用于检查field是否为空，若空，则记录且删除。</description>
+    </rule>
+
+    <rule errorlevel="ERROR_IGNORE_NULL" iscannull="false">
+      <field>parent_post_id,cat_id,title,content,author,url,page_id,site_id,site_name,source,taskId,sentiment,keywords,fingerprint</field>
+      <description>该规则用于检查field是否为空，若空，则记录。</description>
+    </rule>
+
+    <rule errorlevel="ERROR_IGNORE_NULL" iscannull="false" type="Int">
+      <field>is_ad,is_robot</field>
+      <description>该规则用于记录原值字段是否为shifou</description>
+    </rule>
+
+    <rule errorlevel="ERROR_IGNORE_NULL" iscannull="false">
+      <field>publish_date,update_date</field>
+      <valids>
+        <valid>
+          <execute>date</execute>
+          <!--action和type联合使用，比如type等于regex时，用户还需填写表达式-->
+          <action>yyyyMMddHHmmss</action>
+        </valid>
+      </valids>
+      <description>规则检查field是否为空，且是否是满足格式的日期时间</description>
+    </rule>
+
+  </ruleset>
+
+</configuration>

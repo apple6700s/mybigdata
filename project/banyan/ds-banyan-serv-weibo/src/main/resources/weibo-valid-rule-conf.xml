@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+  <!--规则名称，用于xml加载-->
+  <ruleset name="user">
+
+    <rule errorlevel="ERROR_DELETE" iscannull="false">
+      <field>pk,uid</field>
+      <description>规则用于检查field是否为空，若空，则记录且删除。</description>
+    </rule>
+
+    <rule errorlevel="ERROR_IGNORE_NULL" iscannull="false">
+      <field>name,fans_level,meta_group,activeness,sources,topics,emojis,keywords,blog_url,head_url,url,domain,weihao,group,tag_dist</field>
+      <description>该规则用于检查field是否为空，若空，则记录。</description>
+    </rule>
+
+    <!--<rule errorlevel="ERROR_IGNORE_NULL" iscannull="false" type="Int">-->
+      <!--<field></field>-->
+      <!--<description>该规则用于记录原值字段是否为</description>-->
+    <!--</rule>-->
+
+    <rule errorlevel="ERROR_IGNORE_NULL" iscannull="false" isrecordzero="true" type="Int">
+      <field>fans_cnt,follow_cnt,wb_cnt,fav_cnt</field>
+      <description>该规则用于记录原值字段是否为零值</description>
+    </rule>
+
+    <rule errorlevel="ERROR_IGNORE_NULL" iscannull="false">
+      <field>publish_date,update_date</field>
+      <valids>
+        <valid>
+          <execute>date</execute>
+          <!--action和type联合使用，比如type等于regex时，用户还需填写表达式-->
+          <action>yyyyMMddHHmmss</action>
+        </valid>
+      </valids>
+      <description>规则检查field是否为空，且是否是满足格式的日期时间</description>
+    </rule>
+
+  </ruleset>
+
+  <ruleset name="content">
+
+    <rule errorlevel="ERROR_DELETE" iscannull="false">
+      <field>pk,mid</field>
+      <description>规则用于检查field是否为空，若空，则记录且删除。</description>
+    </rule>
+
+    <rule errorlevel="ERROR_IGNORE_NULL" iscannull="false">
+      <field>uid,src_content,content,src_mid,rt_mid,msg_type,source,pic_urls,sentiment,keywords,fingerprint,topics,emoji,short_link,original_link,mention,url</field>
+      <description>该规则用于检查field是否为空，若空，则记录。</description>
+    </rule>
+
+    <rule errorlevel="ERROR_IGNORE_NULL" iscannull="false" isrecordzero="true" type="Int">
+      <field>reposts_cnt,comments_cnt,attitudes_cnt</field>
+      <description>该规则用于记录原值字段是否为零值</description>
+    </rule>
+
+    <rule errorlevel="ERROR_IGNORE_NULL" iscannull="false" type="Int">
+      <field>is_ad</field>
+      <description>该规则用于记录原值字段是否为shifou</description>
+    </rule>
+
+    <rule errorlevel="ERROR_IGNORE_NULL" iscannull="false">
+      <field>publish_date,update_date</field>
+      <valids>
+        <valid>
+          <execute>date</execute>
+          <!--action和type联合使用，比如type等于regex时，用户还需填写表达式-->
+          <action>yyyyMMddHHmmss</action>
+        </valid>
+      </valids>
+      <description>规则检查field是否为空，且是否是满足格式的日期时间</description>
+    </rule>
+
+  </ruleset>
+
+</configuration>

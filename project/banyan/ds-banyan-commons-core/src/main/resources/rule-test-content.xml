@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+  <!--规则名称，用于xml加载-->
+  <ruleset name="ruleset">
+    <!--errorlevel是若输入数据不满足要求时错误的级别-->
+    <!--isCanNull该规则对应的字段是否可空-->
+    <!--field 需要检查的字段名称-->
+    <rule errorlevel="ERROR_DELETE" iscannull="false" type="String" isrecordzero="true">
+      <!--支持相同规则字段并列-->
+      <field>id, name</field>
+      <!--type属于处理类型-->
+      <!--type=regex表示正则，在action中填入表达式。-->
+      <!--有一些常见的方法会被内置，比如mid的检查，是否为空等等-->
+      <valids>
+        <valid>
+          <execute>regex</execute>
+          <!--action和type联合使用，比如type等于regex时，用户还需填写表达式-->
+          <action>\d+</action>
+        </valid>
+        <valid>
+          <execute>regex</execute>
+          <!--action和type联合使用，比如type等于regex时，用户还需填写表达式-->
+          <action>\d+</action>
+        </valid>
+      </valids>
+
+      <description>描述该字段规则</description>
+    </rule>
+
+    <rule errorlevel="ERROR_IGNORE_NULL" iscannull="true" type="String" isrecordzero="true">
+      <field>time</field>
+      <!--type属于处理类型-->
+      <!--type=regex表示正则，在action中填入表达式。-->
+      <!--有一些常见的方法会被内置，比如mid的检查，是否为空等等-->
+      <valids>
+        <valid>
+          <execute>date</execute>
+          <!--action和type联合使用，比如type等于regex时，用户还需填写表达式-->
+          <action>yyyyMMddHHmmss</action>
+        </valid>
+      </valids>
+      <description>描述该字段规则</description>
+    </rule>
+
+  </ruleset>
+</configuration>

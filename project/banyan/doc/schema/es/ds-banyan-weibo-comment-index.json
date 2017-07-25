@@ -1,0 +1,186 @@
+curl -XPUT http://todi1:9200/ds-banyan-weibo-comment-index-v1 -d '
+{
+  "settings": {
+    "index.number_of_shards": 48,
+    "index.number_of_replicas": 0
+  },
+  "aliases": {
+    "ds-banyan-weibo-comment-index": {}
+  },
+  "mappings": {
+    "comment": {
+      "_all": {
+        "enabled": false
+      },
+      "_parent": {
+        "type": "weibo",
+        "fielddata": {
+          "loading": "eager_global_ordinals"
+        }
+      },
+      "dynamic_templates": [
+        {
+          "template_1": {
+            "match": "*",
+            "match_mapping_type": "string",
+            "mapping": {
+              "index": "not_analyzed",
+              "type": "string"
+            }
+          }
+        }
+      ],
+      "_routing": {
+        "required": true
+      },
+      // remove fields: user_type, gender, province, city, meta_group, verified_type, birth_year
+      "properties": {
+        // cmt_mid
+        "id": {
+          "index": "not_analyzed",
+          "type": "string"
+        },
+        // old : uid
+        "cmt_uid": {
+          "index": "not_analyzed",
+          "type": "string"
+        },
+        "user_name": {
+          "index": "not_analyzed",
+          "type": "string"
+        },
+        "keywords": {
+          "index": "not_analyzed",
+          "type": "string"
+        },
+        "content": {
+          "analyzer": "wordsEN",
+          "type": "string"
+        },
+        "sentiment": {
+          "type": "short"
+        },
+        "fingerprint": {
+          "index": "not_analyzed",
+          "type": "string"
+        },
+        // routing parent
+        "mid": {
+          "index": "not_analyzed",
+          "type": "string"
+        },
+        // old : comment_date
+        "publish_date": {
+          "index": "not_analyzed",
+          "type": "string"
+        },
+        // old: content_length
+        "content_len": {
+          "type": "long"
+        },
+        // old: comment_time
+        "publish_time": {
+          "type": "long"
+        },
+        // old : comment_date
+        "publish_date_date": {
+          "index": "not_analyzed",
+          "type": "string"
+        },
+        // old: comment_hour
+        "publish_date_hour": {
+          "index": "not_analyzed",
+          "type": "string"
+        }
+      }
+    },
+    "weibo": {
+      "_all": {
+        "enabled": false
+      },
+      "dynamic_templates": [
+        {
+          "template_1": {
+            "mapping": {
+              "index": "not_analyzed",
+              "type": "string"
+            },
+            "match_mapping_type": "string",
+            "match": "*"
+          }
+        }
+      ],
+      // remove_fields: is_robot
+      "properties": {
+        "id": {
+          "index": "not_analyzed",
+          "type": "string"
+        },
+        "uid": {
+          "index": "not_analyzed",
+          "type": "string"
+        },
+        "msg_type": {
+          "type": "short"
+        },
+        // pid
+        "rt_mid": {
+          "index": "not_analyzed",
+          "type": "string"
+        },
+        "content": {
+          "analyzer": "wordsEN",
+          "type": "string"
+        },
+        // content_length
+        "content_len": {
+          "type": "long"
+        },
+        "sentiment": {
+          "type": "short"
+        },
+        // retweet_content
+        "src_content": {
+          "analyzer": "wordsEN",
+          "type": "string"
+        },
+        // retweet_content_length
+        "src_content_len": {
+          "type": "long"
+        },
+        // retweet_id
+        "src_mid": {
+          "index": "not_analyzed",
+          "type": "string"
+        },
+        "self_content": {
+          "analyzer": "wordsEN",
+          "type": "string"
+        },
+        // self_content_length
+        "self_content_len": {
+          "type": "long"
+        },
+        // post_time_hour
+        "publish_date_hour": {
+          "index": "not_analyzed",
+          "type": "string"
+        },
+        // post_time_date
+        "publish_date_date": {
+          "index": "not_analyzed",
+          "type": "string"
+        },
+        "publish_date": {
+          "index": "not_analyzed",
+          "type": "string"
+        },
+        // post_time
+        "publish_time": {
+          "type": "long"
+        }
+      }
+    }
+  }
+}
+'

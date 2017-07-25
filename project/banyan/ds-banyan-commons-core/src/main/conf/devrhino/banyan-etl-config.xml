@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+
+<configuration>
+
+  <property>
+    <name>kafka.broker.list</name>
+    <!--<value>dev3:6667</value>-->
+    <value>devrhino1:6667,devrhino2:6667,devrhino3:6667</value>
+    <!--<value>alps18:6667,alps3:6667,alps35:6667,alps51:6667,alps8:6667</value>-->
+  </property>
+
+  <!--spark conf-->
+  <property>
+    <name>spark.master.url</name>
+    <value>spark://devrhino:7077</value>
+    <!--<value>spark://alps62:7077</value>-->
+    <description></description>
+  </property>
+
+  <!--<property>-->
+  <!--<name>spark.cores.max</name>-->
+  <!--<value>40</value>-->
+  <!--</property>-->
+
+  <!--<property>-->
+  <!--<name>spark.default.parallelism</name>-->
+  <!--<value>40</value>-->
+  <!--<description></description>-->
+  <!--</property>-->
+
+  <!--<property>-->
+  <!--<name>spark.executor.memory</name>-->
+  <!--<value>8g</value>-->
+  <!--<description></description>-->
+  <!--</property>-->
+
+  <!-- kafka zk config -->
+  <property>
+    <name>kafka.hbase.zookeeper.property.clientPort</name>
+    <value>2181</value>
+  </property>
+
+  <property>
+    <name>kafka.hbase.zookeeper.quorum</name>
+    <!--<value>alps17,alps2,alps34,alps50,alps59</value>-->
+    <value>devrhino1,devrhino2,devrhino3</value>
+  </property>
+
+  <!-- es config -->
+  <property>
+    <name>es.hosts</name>
+    <value>172.18.5.142:9300,172.18.5.141:9300</value>
+    <!--<value>alps61:9300,alps62:9300,alps63:9300,todi1:9300,todi2:9300,todi3:9300,todi4:9300,todi5:9300,todi6:9300,todi7:9300,todi8:9300,todi9:9300,todi10:9300,todi11:9300,todi12:9300,todi13:9300,todi14:9300,todi16:9300,todi17:9300,todi18:9300,todi19:9300,todi20:9300,todi21:9300,todi22:9300,todi23:9300,todi24:9300,todi25:9300,todi26:9300,todi27:9300,todi28:9300,todi29:9300,todi30:9300</value>-->
+    <!--<value>172.18.5.142:9300,172.18.5.141:9300</value>-->
+    <description></description>
+  </property>
+
+  <!--Rhino*Writer写入的cluster-->
+  <property>
+    <name>es.cluster.name</name>
+    <value>devrhino_es_cluster</value>
+    <!--<value>rhino_es_cluster</value>-->
+    <description></description>
+  </property>
+
+  <property>
+    <name>redis.server</name>
+    <value>banyan:etl:$alps30:6379:0</value>
+  </property>
+
+</configuration>
