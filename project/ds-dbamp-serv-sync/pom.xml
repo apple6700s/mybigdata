@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.datastory.dbamp</groupId>
+  <artifactId>ds-dbamp-serv-sync</artifactId>
+  <version>0.0.3-SNAPSHOT</version>
+
+  <name>ds-dbamp-serv-sync</name>
+  <url>http://maven.apache.org</url>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.scm.id>datatub-git-scm</project.scm.id>
+    <dt.hornbill.commons.algo.snt>0.5.22</dt.hornbill.commons.algo.snt>
+    <dt.mig.commons.core.version>0.0.6-SNAPSHOT</dt.mig.commons.core.version>
+  </properties>
+
+  <distributionManagement>
+    <repository>
+      <id>releases</id>
+      <url>http://maven.datatub.com/nexus/content/repositories/releases</url>
+    </repository>
+
+    <snapshotRepository>
+      <id>snapshots</id>
+      <url>http://maven.datatub.com/nexus/content/repositories/snapshots</url>
+    </snapshotRepository>
+  </distributionManagement>
+
+  <repositories>
+    <repository>
+      <id>nexus</id>
+      <name>nexus</name>
+      <url>http://maven.datatub.com/nexus/content/groups/public/</url>
+      <releases>
+        <enabled>true</enabled>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+    </repository>
+  </repositories>
+
+  <scm>
+    <connection>scm:git:http://git.datatub.com/dbamp/ds-dbamp-serv-sync.git</connection>
+    <developerConnection>scm:git:http://git.datatub.com/dbamp/ds-dbamp-serv-sync.git</developerConnection>
+    <tag>HEAD</tag>
+  </scm>
+
+  <dependencies>
+
+    <dependency>
+      <groupId>com.datastory.dbamp</groupId>
+      <artifactId>ds-dbamp-commons-core</artifactId>
+      <version>${dt.mig.commons.core.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.apache.spark</groupId>
+      <artifactId>spark-core_2.10</artifactId>
+      <version>1.6.2</version>
+    </dependency>
+
+    <dependency>
+      <groupId>com.datatub.scavenger</groupId>
+      <artifactId>dt-scavenger-commons</artifactId>
+      <version>0.0.3</version>
+      <exclusions>
+        <exclusion>
+          <groupId>org.apache.hadoop</groupId>
+          <artifactId>*</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.apache.hbase</groupId>
+          <artifactId>*</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>com.yeezhao.hornbill</groupId>
+          <artifactId>dt-hornbill-commons-algo-snt</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>com.yeezhao.hornbill</groupId>
+          <artifactId>dt-hornbill-commons-analyz-base</artifactId>
+        </exclusion>
+        <exclusion>
+          <artifactId>yz-commons-hadoop</artifactId>
+          <groupId>com.yeezhao.commons</groupId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+
+    <dependency>
+      <groupId>org.elasticsearch</groupId>
+      <artifactId>elasticsearch-hadoop</artifactId>
+      <version>2.4.3</version>
+      <exclusions>
+        <exclusion>
+          <groupId>*</groupId>
+          <artifactId>*</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+
+    <dependency>
+      <groupId>org.apache.hbase</groupId>
+      <artifactId>hbase-client</artifactId>
+      <version>1.1.2.2.4.2.0-258</version>
+      <exclusions>
+        <exclusion>
+          <groupId>com.google.guava</groupId>
+          <artifactId>guava</artifactId>
+        </exclusion>
+        <exclusion>
+          <artifactId>jackson-core</artifactId>
+          <groupId>com.fasterxml.jackson.core</groupId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+
+    <dependency>
+      <groupId>org.apache.hbase</groupId>
+      <artifactId>hbase-server</artifactId>
+      <version>1.1.2.2.4.2.0-258</version>
+      <exclusions>
+        <exclusion>
+          <groupId>com.google.guava</groupId>
+          <artifactId>guava</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+
+    <!--<dependency>-->
+    <!--<groupId>com.yeezhao.hornbill</groupId>-->
+    <!--<version>0.5.21-SNAPSHOT</version>-->
+    <!--<artifactId>dt-hornbill-commons-analyz-base</artifactId>-->
+    <!--</dependency>-->
+
+    <dependency>
+      <groupId>com.datastory.commons</groupId>
+      <artifactId>ds-commons-spark-client</artifactId>
+      <version>0.3.0</version>
+      <exclusions>
+        <exclusion>
+          <artifactId>servlet-api</artifactId>
+          <groupId>javax.servlet</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>jackson-core</artifactId>
+          <groupId>com.fasterxml.jackson.core</groupId>
+        </exclusion>
+          <exclusion>
+            <artifactId>commons-lang3</artifactId>
+            <groupId>org.apache.commons</groupId>
+          </exclusion>
+        <exclusion>
+          <artifactId>commons-lang</artifactId>
+          <groupId>org.apache.commons</groupId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+
+
+    <dependency>
+      <groupId>com.yeezhao.hornbill</groupId>
+      <artifactId>dt-hornbill-commons-algo-snt</artifactId>
+      <version>${dt.hornbill.commons.algo.snt}</version>
+      <exclusions>
+        <exclusion>
+          <artifactId>jackson-core</artifactId>
+          <groupId>com.fasterxml.jackson.core</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>jackson-annotations</artifactId>
+          <groupId>com.fasterxml.jackson.core</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>protobuf-java</artifactId>
+          <groupId>com.google.protobuf</groupId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+
+  </dependencies>
+
+  <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>2.5.1</version>
+          <configuration>
+            <source>1.7</source>
+            <target>1.7</target>
+            <encoding>UTF-8</encoding>
+          </configuration>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+
+    <plugins>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>copy-dependencies</id>
+            <phase>package</phase>
+            <goals>
+              <goal>copy-dependencies</goal>
+            </goals>
+            <configuration>
+              <includeScope>compile</includeScope>
+              <excludeScope>test</excludeScope>
+              <outputDirectory>${project.build.directory}/lib</outputDirectory>
+              <overWriteReleases>false</overWriteReleases>
+              <overWriteSnapshots>true</overWriteSnapshots>
+              <overWriteIfNewer>true</overWriteIfNewer>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>versions-maven-plugin</artifactId>
+        <version>2.0</version>
+      </plugin>
+
+      <!-- 编译插件 -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>2.3.1</version>
+        <configuration>
+          <source>1.7</source>
+          <target>1.7</target>
+          <encoding>utf-8</encoding>
+        </configuration>
+      </plugin>
+
+      <!-- 测试插件 -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>2.8</version>
+        <configuration>
+          <skipTests>true</skipTests>
+        </configuration>
+      </plugin>
+
+      <!-- release 插件，用于打tag -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-release-plugin</artifactId>
+        <version>2.5.3</version>
+        <configuration>
+                      <!-- 这个很重要！！！！！！只有设置自动提交的属性才能发布成功 -->
+          <pushChanges>true</pushChanges>
+        </configuration>
+      </plugin>
+
+
+      <!-- copy resources -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-resources-plugin</artifactId>
+        <version>2.3</version>
+        <configuration>
+          <encoding>UTF-8</encoding>
+          <nonFilteredFileExtensions>
+            <nonFilteredFileExtension>dat</nonFilteredFileExtension>
+          </nonFilteredFileExtensions>
+        </configuration>
+        <executions>
+          <execution>
+            <id>copy-resources</id>
+            <phase>package</phase>
+            <goals>
+              <goal>copy-resources</goal>
+            </goals>
+            <configuration>
+              <encoding>UTF-8</encoding>
+              <outputDirectory>${project.build.directory}/conf</outputDirectory>
+              <resources>
+                <resource>
+                  <directory>src/main/resources/</directory>
+                  <includes>
+                    <include>*.xml</include>
+                    <include>*.conf</include>
+                    <include>*.txt</include>
+                    <include>*.filter</include>
+                    <include>*.properties</include>
+                  </includes>
+                  <filtering>true</filtering>
+                  <!--it's necessary to use Profiles -->
+                </resource>
+              </resources>
+            </configuration>
+          </execution>
+
+          <execution>
+            <id>copy-shell</id>
+            <phase>package</phase>
+            <goals>
+              <goal>copy-resources</goal>
+            </goals>
+            <configuration>
+              <encoding>UTF-8</encoding>
+              <outputDirectory>${project.build.directory}/</outputDirectory>
+              <!--  把配置文件拷到和jar包同一个路径下 -->
+              <resources>
+                <resource>
+                  <directory>src/main/bin/</directory>
+                  <filtering>true</filtering>
+                </resource>
+              </resources>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+
+</project>

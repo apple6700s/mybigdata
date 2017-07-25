@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+
+    <property>
+        <name>es.hosts</name>
+        <value>alps61:9300,alps62:9300,alps63:9300,todi1:9300,todi2:9300,todi3:9300,todi4:9300,todi5:9300,todi6:9300,todi7:9300,todi8:9300,todi9:9300,todi10:9300,todi11:9300,todi12:9300,todi13:9300,todi14:9300,todi15:9300,todi16:9300,todi17:9300,todi18:9300,todi19:9300,todi20:9300,todi21:9300,todi22:9300,todi23:9300,todi24:9300,todi25:9300,todi26:9300,todi27:9300,todi28:9300,todi29:9300,todi30:9300,todi31:9300,todi32:9300,todi33:9300,todi34:9300,todi35:9300,todi36:9300,todi37:9300,todi38:9300,todi39:9300,todi40:9300,todi41:9300,todi42:9300,todi43:9300,todi44:9300,todi45:9300,todi46:9300,todi47:9300,todi48:9300</value>
+    </property>
+
+    <property>
+        <name>es.cluster.name</name>
+        <value>rhino_es_cluster</value>
+    </property>
+
+    <!--<property>-->
+    <!--<name>es.hosts</name>-->
+    <!--<value>172.18.5.142:9300,172.18.5.141:9300</value>-->
+    <!--</property>-->
+
+    <!--<property>-->
+    <!--<name>es.cluster.name</name>-->
+    <!--<value>devrhino_es_cluster</value>-->
+    <!--</property>-->
+
+    <!-- Job扫描间隔时间,单位s-->
+    <property>
+        <name>job.scan.interval</name>
+        <value>300</value>
+    </property>
+
+    <!--<property>-->
+    <!--<name>mig.alert.rest.api</name>-->
+    <!--<value>http://172.18.6.29:8959/datatub/alertService/sendAlert</value>-->
+    <!--</property>-->
+
+
+    <!--spark conf-->
+    <property>
+        <name>spark.master.url</name>
+        <!--<value>spark://dev1:7077</value>-->
+        <!--<value>spark://alps62:7077</value>-->
+        <value>spark://alps61:7077,alps62:7077</value>
+        <description></description>
+    </property>
+
+    <property>
+        <name>spark.cores.max</name>
+        <value>120</value>
+        <!--<value>5</value>-->
+        <description></description>
+    </property>
+
+    <property>
+        <name>spark.default.parallelism</name>
+        <value>40</value>
+        <description></description>
+    </property>
+
+    <property>
+        <name>spark.executor.memory</name>
+        <value>8g</value>
+        <description></description>
+    </property>
+
+    <property>
+        <name>one.day.two.time.quartz</name>
+        <value>0 0 */12 * * ?</value>
+        <description>一天两次的数据同步,同步前两天的数据。</description>
+    </property>
+
+    <property>
+        <name>three.day.one.time.quartz</name>
+        <value>0 0 4 */3 * ?</value>
+        <description>三天1次的数据同步,同步前一周的数据。晚上4点触发</description>
+    </property>
+
+    <property>
+        <name>seven.day.one.time.quartz</name>
+        <value>0 0 2 */7 * ?</value>
+        <description>一周1次的数据同步,同步前一个月的数据。晚上2点触发</description>
+    </property>
+
+    <property>
+        <name>one.day.one.time.quartz</name>
+        <value>0 0 5 * * ?</value>
+        <description>一天1次的数据同步,同步前一个月的数据。凌晨4点触发</description>
+    </property>
+
+    <property>
+        <name>es.scroll.size</name>
+        <value>1000</value>
+    </property>
+
+</configuration>
